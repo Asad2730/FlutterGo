@@ -1,7 +1,7 @@
  package controller
 
 import (
-	
+	"strings"
 	"api/config"
 	"api/models"
 	"github.com/gin-gonic/gin"
@@ -37,7 +37,6 @@ import (
 	var user models.User
 	 c.BindJSON(&user)
 	config.DB.Where("id = ?",c.Param("id")).Updates(&user)
-
     c.JSON(200, &user)
  }
 
@@ -45,5 +44,14 @@ import (
      
 	var user models.User
     config.DB.Where("id = ?",c.Param("id")).First(&user)
+    c.JSON(200, &user)
+ }
+
+ func LoginUser(c * gin.Context){
+    
+	 email := strings.ToUpper(c.Param("email"))
+	 password := strings.ToUpper(c.Param("password"))
+	var user models.User
+	config.DB.Where("UPPER(email) = ? and UPPER(password) = ?", email, password).First(&user)
     c.JSON(200, &user)
  }

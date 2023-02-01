@@ -1,5 +1,7 @@
-import 'package:app/db.dart';
+
+import 'package:app/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Db().getUsers();
+
     return MaterialApp(
-      home: Container(),
+      home:const Login(),
+      navigatorKey: Get.key,
     );
   }
 }

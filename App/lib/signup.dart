@@ -1,26 +1,29 @@
 import 'package:app/customWidgets.dart';
 import 'package:app/db.dart';
-import 'package:app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+import 'login.dart';
+
+
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
 
-
+  var name = TextEditingController();
   var email = TextEditingController();
   var password = TextEditingController();
+
 
   @override
   void dispose() {
     super.dispose();
-
+    name.clear();
     email.clear();
     password.clear();
   }
@@ -34,18 +37,18 @@ class _LoginState extends State<Login> {
   }
 
   Widget _form(){
-     return Column(
-       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-       mainAxisSize: MainAxisSize.min,
-       children: [
-         const SizedBox(height: 100,),
-
-         myTextField(controllerTxt:email , hintTxt: 'enter email'),
-         myTextField(controllerTxt:password , hintTxt: 'enter password'),
-         _myButton(txt: 'Login'),
-         TextButton(onPressed: ()=> Get.to(()=>const SignUp()), child: const Text("Don't have an account? Signup")),
-       ],
-     );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(height: 100,),
+        myTextField(controllerTxt:name , hintTxt: 'enter name'),
+        myTextField(controllerTxt:email , hintTxt: 'enter email'),
+        myTextField(controllerTxt:password , hintTxt: 'enter password'),
+        _myButton(txt: 'SignUp'),
+        TextButton(onPressed: ()=>Get.to(()=>const Login()), child: const Text("Have  an account? Login")),
+      ],
+    );
   }
 
   Widget _myButton( {required String txt}) {
@@ -71,8 +74,9 @@ class _LoginState extends State<Login> {
   }
 
   void _submit(){
-    Db().loginUser(email: email.text, password: password.text);
-   email.clear();
-   password.clear();
+    Db().signUp(name: name.text,email: email.text, password: password.text);
+    name.clear();
+    email.clear();
+    password.clear();
   }
 }
