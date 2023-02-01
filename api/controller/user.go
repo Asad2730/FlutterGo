@@ -29,7 +29,7 @@ import (
      
 	var user models.User
     config.DB.Where("id = ?",c.Param("id")).Delete(&user)
-    c.JSON(200, &user)
+    c.JSON(200, "User Deleted")
  }
 
  func UpdateUser(c * gin.Context){
