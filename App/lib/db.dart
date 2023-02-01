@@ -35,13 +35,15 @@ Future loginUser({required String email,required String password}) async {
 
  Future signUp({required String name,required String email ,required String password}) async{
     try{
-       await _dio.post('createUser/',data: {
+      var response = await _dio.post('createUser/',data: {
         'name':name,
         'email':email,
         'password':password
       });
+       if(response.data){
+         Get.to(()=>const Login());
+       }
 
-       Get.offAll(()=>const Login());
     }catch(ex){
       throw ex.toString();
     }
