@@ -10,6 +10,6 @@ func main(){
 	r:= gin.Default()
     config.Connect()
     routes.UserRoute(r)
-	r.Run(":8080" ) //0.0.0.0
+	r.Run("0.0.0.0:8080" ) 
 
 }
