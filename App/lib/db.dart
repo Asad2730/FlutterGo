@@ -23,7 +23,6 @@ class Db{
 
 Future loginUser({required String email,required String password}) async {
     try{
-
       var response = await _dio.get('login/$email/$password');
       User.id = response.data['id'];
       User.email = response.data['email'];
