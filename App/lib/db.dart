@@ -15,7 +15,7 @@ class Db{
  Future getUsers() async {
     try{
       var response = await _dio.get('getUsers/');
-      print('${response.data as List}');
+      return response.data as List;
     }catch(ex){
       throw ex.toString();
     }
@@ -51,13 +51,5 @@ Future loginUser({required String email,required String password}) async {
  }
 
 
- Future getLogin() async{
-    try{
-      var request = await _dio.get('getUsers/');
-      return request.data as List;
-    }catch(ex){
-      throw ex.toString();
-    }
- }
 
 }
