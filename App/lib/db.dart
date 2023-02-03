@@ -1,11 +1,12 @@
 import 'package:app/login.dart';
 import 'package:app/user.dart';
+import 'package:app/usersList.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class Db{
   final _dio = Dio();
-  final _ip = '192.168.100.198';
+  final _ip = '192.168.10.4';
 
   Db(){
       _dio.options.baseUrl = 'http://$_ip:3000/';
@@ -27,7 +28,7 @@ Future loginUser({required String email,required String password}) async {
       User.id = response.data['id'];
       User.email = response.data['email'];
       User.password = response.data['password'];
-
+      Get.to(()=>const UsersList());
     }catch(ex){
       throw ex.toString();
     }
@@ -44,6 +45,16 @@ Future loginUser({required String email,required String password}) async {
          Get.to(()=>const Login());
        }
 
+    }catch(ex){
+      throw ex.toString();
+    }
+ }
+
+
+ Future getLogin() async{
+    try{
+      var request = await _dio.get('getUsers/');
+      return request.data as List;
     }catch(ex){
       throw ex.toString();
     }
